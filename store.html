@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en" class="orange-theme">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="author" content="Maxartkiller">
+
+		<title>书库·辰星中文网</title>
+
+		<!-- iconfont CSS -->
+		<link rel="stylesheet" href="vendor/iconfont/iconfont.css">
+
+		<!-- Roboto fonts CSS -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/style.css" rel="stylesheet">
+		
+		<link href="vendor/dropload/dropload.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<div class="row no-gutters vh-100 loader-screen">
+	        <div class="col align-self-center text-white text-center">
+	            <div class="laoderhorizontal">
+	                <div></div>
+	                <div></div>
+	                <div></div>
+	                <div></div>
+	            </div>
+	        </div>
+	    </div>
+		<div class="wrapper">
+			<div class="header">
+				<div class="row no-gutters">
+					<div class="col-auto">
+						<a href="" class="btn btn-link text-dark"><i class="iconfont icon-back"></i></a>
+					</div>
+					<div class="col text-left header-title">书库</div>
+					<div class="col-auto">
+						<a href="" class="btn btn-link text-dark">
+							<!-- 未登陆 -->
+							<i class="iconfont icon-denglu"></i>
+						</a>
+						<a href="" class="btn btn-link text-dark">
+							<!-- 已登陆 -->
+							<i class="iconfont icon-zhanghao"></i>
+						</a>
+						<a href="" class="btn btn-link text-dark">
+							<i class="iconfont icon-search"></i>
+						</a>
+						<a href="" class="btn btn-link text-dark" id="btnRight">
+							<i class="iconfont icon-shaixuan"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="wrap">
+				<div class="layer-right">
+					<h5 class="text-center">筛选</h5>
+					<form class="catelog">
+						<h6>频道</h6>
+						<div class="d-flex pl-2 flex-wrap">
+							<div class="radio-label">
+								<input type="radio" id="channel-1" name="channel" value="1" checked>
+								<label for="channel-1">男频</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="channel-2" name="channel" value="2">
+								<label for="channel-2">女频</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="channel-3" name="channel" value="3">
+								<label for="channel-3">出版</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="channel-4" name="channel" value="4">
+								<label for="channel-4">二次元</label>
+							</div>
+						</div>
+						<h6>分类</h6>
+						<div class="d-flex pl-2 flex-wrap">
+							<div class="radio-label">
+								<input type="radio" id="cate-1" name="cate" value="5">
+								<label for="cate-1">东方玄幻</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="cate-2" name="cate" value="6">
+								<label for="cate-2">现代都市</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="cate-3" name="cate" value="7">
+								<label for="cate-3">脑洞创意</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="cate-4" name="cate" value="8">
+								<label for="cate-4">历史架空</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="cate-5" name="cate" value="9">
+								<label for="cate-5">军事战争</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="cate-6" name="cate" value="10">
+								<label for="cate-6">游戏竞技</label>
+							</div>
+						</div>
+						<h6>状态</h6>
+						<div class="d-flex pl-2 flex-wrap">
+							<div class="radio-label">
+								<input type="radio" id="status-1" name="status" value="11">
+								<label for="status-1">连载</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="status-2" name="status" value="12">
+								<label for="status-2">完结</label>
+							</div>
+						</div>
+						<h6>属性</h6>
+						<div class="d-flex pl-2 flex-wrap">
+							<div class="radio-label">
+								<input type="radio" id="attr-1" name="attr" value="13">
+								<label for="attr-1">免费</label>
+							</div>
+							<div class="radio-label">
+								<input type="radio" id="attr-2" name="attr" value="14">
+								<label for="attr-2">VIP</label>
+							</div>
+						</div>
+						<div class="fixed-bottom text-center">
+							<div class="d-flex flex-fill">
+								<buttom id="reset" class="btn btn-light btn-sm w-50">重置</buttom>
+								<buttom id="sure" class="btn btn-orange btn-sm w-50">完成</buttom>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="container">
+				<div class="list-content">
+					<h6 class="subtitle">男频 | 东方玄幻 | 连载</h6>
+					<div class="d-flex justify-content-between flex-wrap pb-2 lists">
+						<!-- <a href="detail.html">
+							<div class="media mt-3">
+								<img src="img/list1.jpg" class="align-self-center mr-3 w-25" alt="...">
+								<div class="media-body">
+									<h6 class="mt-0"><b>空间锦鲤之农门药香</b></h6>
+									<p class="text-secondary small text-overflow-elli">空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香</p>
+									<p class="mb-0 d-flex justify-content-between"><small>忘雨 著</small><small class="text-secondary">言情小说</small></p>
+								</div>
+							</div>
+						</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- jquery, popper and bootstrap js -->
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="vendor/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+
+		<!-- template custom js -->
+		<script src="js/main.js"></script>
+		<script src="js/mSlider.js"></script>
+		<script src="vendor/dropload/dropload.min.js"></script>
+		<!-- page level script -->
+		<script>
+			$(window).on('load', function() {
+				// //移动端使用touchend
+				// var event = navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) ? 'touchend' : 'click';
+				// console.log(event)
+				// // 选择器
+				// var Q = function(id) {
+				// 	return document.getElementById(id)
+				// };
+
+				// //方向控制
+				// //右
+				// var _right = new mSlider({
+				// 	dom: ".layer-right",
+				// 	direction: "right",
+				// 	distance: "70%",
+				// });
+
+				// Q("btnRight").addEventListener(event, function(e) {
+					
+				// 	_right.open();
+				// })
+				// Q("reset").addEventListener(event, function(e) {
+				// 	$("input[name='channel']").prop('checked', false)
+				// 	$("input[name='channel']").eq(0).prop('checked', true)
+				// 	// [0].attr("checked",true)
+				// 	$("input[name='cate']").prop('checked', false)
+				// 	$("input[name='status']").prop('checked', false)
+				// 	$("input[name='attr']").prop('checked', false)
+					
+				// 	// _right.close();
+				// });
+				// Q("sure").addEventListener(event, function(e) {
+				// 	var channelId = []
+				// 	channelId.push($("input[name='channel']:checked").val())
+				// 	var cateId = []
+				// 	cateId.push($("input[name='cate']:checked").val())
+				// 	console.log(channelId,cateId)
+				// 	// console.log(data,'data')
+				// 	kkk()
+				// 	//在此处调用ajax请求
+				// 	_right.close();
+				// });
+				
+			});
+
+			$(function() {
+				var total_page;
+				var current_page = 1;
+				var data = {
+					page: current_page
+				}
+				var isbool = false;
+				var dropload = $('.list-content').dropload({
+				    scrollArea : window,
+				    loadDownFn : function(me){
+				    	//->AJAX
+				        $.ajax({
+						    type: 'post',
+						    url: `json/more${data.page}.json`,
+						    dataType: 'json',
+						    data: data,
+						    success: function(res){
+								total_page = res.last_page
+								current_page ++
+								data.page ++
+								
+								var result = '';
+								$.each(res.data, function(k,item) {
+									result += `<a href="detail.html">
+													<div class="media mt-3">
+														<img src="${item.cover}" class="align-self-center mr-3 w-25" alt="...">
+														<div class="media-body">
+															<h6 class="mt-0"><b>${item.name}</b></h6>
+															<p class="text-secondary small text-overflow-elli">${item.desc}</p>
+															<p class="mb-0 d-flex justify-content-between"><small>忘雨 著</small><small class="text-secondary">${item.cate_name}</small></p>
+														</div>
+													</div>
+												</a>`
+									
+								})
+								if(current_page > total_page) {
+									me.lock()
+									me.noData(true)
+								}
+								// 为了测试，延迟1秒加载
+						        setTimeout(function(){
+						        	$('.loader-screen').fadeOut('slow');
+						            $('.lists').append(result);
+						            // 每次数据加载完，必须重置
+	                                me.resetload();
+						        },1000);
+								// 数据加载完
+								isbool = false
+						    },
+						    error: function(xhr, type){
+						    	$('.loader-screen').fadeOut('slow');
+						        alert('Ajax error!');
+						        isbool = false
+						        // 即使加载出错，也得重置
+		                        me.resetload();
+						    }
+						});
+				       
+				    }
+				});
+				function kkk() {
+					alert('kkkk')
+				}
+				//移动端使用touchend
+				var event = navigator.userAgent.match(/(iPhone|iPod|Android|ios)/i) ? 'touchend' : 'click';
+				console.log(event)
+				// 选择器
+				var Q = function(id) {
+					return document.getElementById(id)
+				};
+				
+				//方向控制
+				//右
+				var _right = new mSlider({
+					dom: ".layer-right",
+					direction: "right",
+					distance: "70%",
+				});
+				
+				Q("btnRight").addEventListener(event, function(e) {
+					
+					_right.open();
+				})
+				Q("reset").addEventListener(event, function(e) {
+					$("input[name='channel']").prop('checked', false)
+					$("input[name='channel']").eq(0).prop('checked', true)
+					// [0].attr("checked",true)
+					$("input[name='cate']").prop('checked', false)
+					$("input[name='status']").prop('checked', false)
+					$("input[name='attr']").prop('checked', false)
+					
+					// _right.close();
+				});
+				Q("sure").addEventListener(event, function(e) {
+					var channelId = []
+					channelId.push($("input[name='channel']:checked").val())
+					var cateId = []
+					cateId.push($("input[name='cate']:checked").val())
+					console.log(channelId,cateId)
+					console.log(data,'data')
+					kkk()
+					//在此处调用ajax请求
+					_right.close();
+				});
+			});
+			
+		</script>
+
+	</body>
+
+</html>
