@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="en" class="orange-theme">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover, user-scalable=no">
+		<meta name="description" content="">
+		<meta name="author" content="Maxartkiller">
+
+		<title>书库·辰星中文网</title>
+
+		<!-- iconfont CSS -->
+		<link rel="stylesheet" href="vendor/iconfont/iconfont.css">
+
+		<!-- Roboto fonts CSS -->
+		<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+
+		<!-- Bootstrap core CSS -->
+		<link href="vendor/bootstrap-4.3.1/css/bootstrap.min.css" rel="stylesheet">
+
+		<!-- Custom styles for this template -->
+		<link href="css/style.css" rel="stylesheet">
+		
+	</head>
+
+	<body>
+		
+		<div class="wrapper">
+			<div class="header search-input">
+				<div class="row no-gutters">
+					<div class="col p-2">
+                        <div class="input-group">
+                            <a class="btn align-self-center ">
+                                <i class="iconfont icon-search"></i>
+                            </a>
+                            <input type="text" class="form-control align-self-center bg-transparent border-0" placeholder="搜索你想要的内容">
+                            <a class="btn align-self-center del">
+                                <i class="iconfont icon-search"></i>
+                            </a>
+                        </div>
+                    </div>
+					<div class="col-auto align-self-center p-2 search-btn">
+						搜索
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="list-content">
+                    <div class="last-search">
+                        <div class="d-flex justify-content-between">
+                            <p>最近搜索</p>
+                            
+                            <a class="delAll">全部删除</a>
+                        </div>
+                        <div class="d-flex justify-content-between searched-item">
+                            
+                        </div>
+                    </div>
+					<div class="d-flex justify-content-between flex-wrap pb-2 lists">
+						<!-- <a href="detail.html">
+							<div class="media mt-3">
+								<img src="img/list1.jpg" class="align-self-center mr-3 w-25" alt="...">
+								<div class="media-body">
+									<h6 class="mt-0"><b>空间锦鲤之农门药香</b></h6>
+									<p class="text-secondary small text-overflow-elli">空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香</p>
+									<p class="mb-0 d-flex justify-content-between"><small>忘雨 著</small><small class="text-secondary">言情小说</small><small class="theme-color">444人气</small></p>
+								</div>
+							</div>
+						</a> -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- jquery, popper and bootstrap js -->
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="vendor/bootstrap-4.3.1/js/bootstrap.min.js"></script>
+
+		<!-- template custom js -->
+		<script src="js/main.js"></script>
+		<!-- page level script -->
+		<script>
+			
+			$(function() {
+                var searchName = '';
+                var searchList = JSON.parse(localStorage.getItem('searchList')) || [];
+                var searchassociatedtime = null;
+                var ntimeout = 10000;
+                var searchstarted   = true;
+                var searchNameopeon = false;
+                var searchItemHtml = ''
+                $('.last-search').css({
+                    display: searchList.length > 0 ? 'block' : 'none'
+                })
+                console.log(searchList)
+                if(searchList.length > 0) {
+                   
+                    $.each(searchList, function(i,v) {
+                        // console.log(i,v)
+                        searchItemHtml += `<span class="label label-default">${v}</span>`
+                    })
+
+                    $('.last-search').append(searchItemHtml) 
+                }
+                $(document).on('click', '.label', function() {
+                    searchName = $(this).text()
+                    search(searchName)
+                    $('.search-input input').val(searchName)
+                    $('.del').show()
+                })
+				//输入搜索关键字
+                $('.search-input').on('input', 'input', function (e)
+                    {
+                        searchName = $.trim($(this).val());
+                        if (searchName.length > 0){
+                            $('.del').show();
+                        }else{
+
+                        }
+                    }
+                );
+                //删除input内容
+                $('.del').on('click', function ()
+                {
+                    $(this).hide();
+                    $(".search-input input").val('');
+                });
+                //删除本地所有搜索历史
+                $('.delAll').on('click',function() {
+                    localStorage.removeItem('searchList')
+                    $('.last-search').empty()
+                })
+               
+                //点击搜索按钮搜索
+                $('.search-btn').on('click', function ()
+                {
+                    searchName = $.trim($('.search-input input').val());
+                    search(searchName)
+                    fixSearchList()
+                });
+                //回车搜索
+                $('.search-input input').on('keypress',function(e) {
+                    var keycode = e.keyCode;
+
+                    var oThis   = $(this);
+
+                    searchName  = $.trim(oThis.val());
+
+                    searchName  = searchName.substring(0, 20);
+
+                    if (keycode == '13'){
+                        if (searchName.length > 0)
+                            {
+
+                                e.preventDefault();
+                                search(searchName)
+                                fixSearchList()
+                            }
+                            else
+                            {
+                                oThis.val('');
+                                consoleMain('请输入要搜索的内容');
+                            }
+                    }
+                })
+                function fixSearchList() {
+                    var index = searchList.findIndex(function(item) {
+                        return item === searchName
+                    })
+                    if(index === -1) {
+                        searchList.push(searchName)
+                        localStorage.setItem("searchList", JSON.stringify(searchList))
+                    }
+                }
+                 //搜索关联词,需要加定时器
+                function searchassociated(keyword){
+                    clearTimeout(searchassociatedtime);
+                    if (searchName.length > 0){
+                        $.ajax(
+                        {
+                            url     : 'json/more1.json',
+                            type    : 'get',
+                            timeout : ntimeout,
+                            cache   : false,
+                            success : function (data) {
+                                var result = ''
+                                $.each(data, function(k,item) {
+                                    result += `<a href="detail.html">
+                                            <div class="media mt-3">
+                                                <img src="img/list1.jpg" class="align-self-center mr-3 w-25" alt="...">
+                                                <div class="media-body">
+                                                    <h6 class="mt-0"><b>空间锦鲤之农门药香</b></h6>
+                                                    <p class="text-secondary small text-overflow-elli">空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香</p>
+                                                    <p class="mb-0 d-flex justify-content-between"><small>忘雨 著</small><small class="text-secondary">言情小说</small></p>
+                                                </div>
+                                            </div>
+                                        </a>`
+                                })
+                                $('.lists').append(result);
+                            },
+                            error: function (err) {
+                            }
+                        });
+                    } else {
+                        
+                    }
+                }
+                //搜索列表
+                function search () {
+                    if (searchName.length > 0){
+                        $('.last-search').hide();
+                        $.ajax(
+                        {
+                            url     : 'json/more1.json',
+                            type    : 'get',
+                            timeout : ntimeout,
+                            cache   : false,
+                            success : function (data) {
+                                var result = ''
+                                $.each(data, function(k,item) {
+                                    result += `<a href="detail.html">
+                                            <div class="media mt-3">
+                                                <img src="img/list1.jpg" class="align-self-center mr-3 w-25" alt="...">
+                                                <div class="media-body">
+                                                    <h6 class="mt-0"><b>空间锦鲤之农门药香</b></h6>
+                                                    <p class="text-secondary small text-overflow-elli">空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香空间锦鲤之农门药香</p>
+                                                    <p class="mb-0 d-flex justify-content-between"><small>忘雨 著</small><small class="text-secondary">言情小说</small><small class="theme-color">444人气</small></p>
+                                                </div>
+                                            </div>
+                                        </a>`
+                                })
+                                $('.lists').append(result);
+                            },
+                            error: function (err) {
+                            }
+                        });
+                    } else {
+                        
+                    }
+                }
+                
+            });
+			
+		</script>
+
+	</body>
+
+</html>
+
